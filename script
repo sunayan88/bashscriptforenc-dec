@@ -1,0 +1,11 @@
+#!/bin/bash
+echo This is a file > file
+cat file
+openssl genrsa -out private.pem 512
+cat private.pem
+openssl rsa -in private.pem -pubout -out public.pem
+cat public.pem
+openssl rsautl -encrypt -in file -out encfile -inkey public.pem -pubin
+cat encfile
+openssl rsautl -decrypt -in encfile -out decfile -inkey private.pem
+cat decfile
